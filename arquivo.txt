@@ -1,0 +1,26 @@
+Análise de Requisição: Qual é o papel da biblioteca HTTPClient no firmware do
+ ESP32 e por que utilizamos o método http.GET() nesta atividade?
+ R:
+ Papel da biblioteca HTTPClient: Ela funciona como o navegador do ESP32, permitindo que a placa faça conexões com a internet, envie pedidos HTTP e receba as respostas das APIs.
+
+Uso do método http.GET(): Usamos o GET porque queremos apenas buscar e ler o conselho da API,
+ sem cadastrar ou alterar nenhuma informação no servidor externo.
+ R:
+ Função do JsonDocument: Ele reserva espaço na memória e converte o texto bruto retornado pela API em uma estrutura organizada que o código em C++ consegue ler facilmente.
+Como o conselho é extraído: Ele acessa as chaves dentro da estrutura do JSON recebido: doc["slip"]["id"] para pegar o número do conselho e doc["slip"]["advice"] para pegar
+ o texto da frase em inglês.
+
+ Arquitetura Web: Por que optamos por realizar a tradução do texto via JavaScript no navegador 
+ em vez de processar a tradução diretamente no código C++ do ESP32? Quais são as vantagens dessa 
+ abordagem em sistemas embarcados?
+R:Por que traduzir via JavaScript no navegador?
+
+Porque assim transferimos a tarefa e o processamento da tradução para o celular do usuário, em vez de sobrecarregar a placa.
+
+Vantagens em sistemas embarcados:
+
+Economia de Recursos: Poupa a memória RAM e o processador do ESP32.
+
+Velocidade: A página carrega mais rápido e sem travamentos (timeout) no servidor da placa.
+
+Tolerância a Falhas: Se a tradução falhar, o erro é tratado no próprio navegador e a placa continua funcionando normalmente sem reiniciar.
